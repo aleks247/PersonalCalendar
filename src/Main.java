@@ -4,6 +4,48 @@ import java.util.Scanner;
 public class Main {
     static ArrayList<event> events = new ArrayList<>();
 
+    public static event searchByName(String name) {
+        for (int i = 0; i < events.size(); i++) {
+            if (name.equals(events.get(i).name)) {
+                return events.get(i);
+            }
+        }
+        return null;
+    }
+
+    public static void searchEvent() {
+        System.out.println("Enter event title: ");
+        Scanner scan = new Scanner(System.in);
+        String name = scan.nextLine();
+        event Event = searchByName(name);
+        if (Event != null) {
+            System.out.println(Event.name + " " + Event.date + " " + Event.startTime + " " + Event.endTime + " " + Event.notes + " ");
+            System.out.println("Do you want to cancel or edit event (1 - Cancel | 2 - Edit | press any key to continue)");
+            String option = scan.nextLine();
+            switch (option) {
+                case "1" -> {
+                    System.out.println("Are you sure you want to cancel the event ? (Yes/No)");
+                    String checking = scan.nextLine();
+                    String checking1 = scan.nextLine();
+                    if (checking1.equals("Yes") || checking1.equals("yes")) {
+                        events.remove(Event);
+                    }
+                }
+                case "2" -> {
+                    System.out.println("Enter new start time: ");
+                    Event.startTime = scan.next();
+                    System.out.println("Enter new end time: ");
+                    Event.endTime = scan.next();
+                    System.out.println("Successfully updated the event !");
+                }
+                default -> System.out.println();
+            }
+        } else {
+            System.out.println("There's no such event");
+        }
+
+    }
+
     public static ArrayList<event> searchByDate(String date) {
         ArrayList<event> result = new ArrayList<>();
         for (int i = 0; i < events.size(); i++) {
@@ -70,6 +112,10 @@ public class Main {
                 case 2 -> {
                     System.out.println();
                     schedule();
+                }
+                case 3 -> {
+                    System.out.println();
+                    searchEvent();
                 }
             }
         }
