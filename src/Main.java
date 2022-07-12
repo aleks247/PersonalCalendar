@@ -95,11 +95,16 @@ public class Main {
         System.out.println("Enter date(dd/mm/yy): ");
         Scanner scan = new Scanner(System.in);
         String date = scan.nextLine();
-        ArrayList<event> eventi = searchByDate(date);
-        if (eventi != null) {
+        ArrayList<event> events1 = searchByDate(date);
+        if (events1 != null) {
             System.out.println("__Daily schedule__");
-            for (int i = 0; i < eventi.size(); i++) {
-                System.out.println(eventi.get(i).name + " " + eventi.get(i).date + " " + eventi.get(i).startTime + " " + eventi.get(i).endTime + " " + eventi.get(i).notes + " ");
+
+            for (int i = 0; i < events1.size(); i++) {
+                System.out.println("-Name: " + events1.get(i).name);
+                System.out.println("-Date: " + events1.get(i).date);
+                System.out.println("-Start: " + events1.get(i).startTime);
+                System.out.println("-End: " + events1.get(i).endTime);
+                System.out.println("-Notes: " + events1.get(i).notes);
             }
         } else {
             System.out.println("There are no saved events for the day.");
@@ -154,6 +159,7 @@ public class Main {
                     availableEvent();
                 }
                 case 5 -> {
+                    System.out.println("Exiting program..");
                     System.exit(0);
                 }
             }
