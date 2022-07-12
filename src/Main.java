@@ -14,18 +14,18 @@ public class Main {
         System.out.println("Enter duration: ");
         String duration = scan.next();
         ArrayList<event> Events = searchByDate(date);
-        if(Events != null){
+        if (Events != null) {
             int test3 = 0;
             event Event = null;
             for (int i = 0; i < Events.size(); i++) {
-                if(Integer.parseInt(Events.get(i).startTime.split(":")[0]) > test3 || Integer.parseInt(Events.get(i).startTime.split(":")[0]) >= test){
+                if (Integer.parseInt(Events.get(i).startTime.split(":")[0]) > test3 || Integer.parseInt(Events.get(i).startTime.split(":")[0]) >= test) {
                     Event = Events.get(i);
                     test3 = Integer.parseInt(Events.get(i).startTime.split(":")[0]);
                 }
             }
-            if(Event == null){
+            if (Event == null) {
                 System.out.println("Available slot for the event: " + date + " " + fromTime);
-            }else {
+            } else {
                 System.out.println("Available slot for the event: " + date + " From: " + Event.endTime);
             }
         } else {
@@ -58,6 +58,9 @@ public class Main {
                     String checking1 = scan.nextLine();
                     if (checking1.equals("Yes") || checking1.equals("yes")) {
                         events.remove(Event);
+                    }
+                    if (checking1.equals("No") || checking1.equals("no")) {
+                        System.out.println();
                     }
                 }
                 case "2" -> {
@@ -149,6 +152,9 @@ public class Main {
                 case 4 -> {
                     System.out.println();
                     availableEvent();
+                }
+                case 5 -> {
+                    System.exit(0);
                 }
             }
         }
