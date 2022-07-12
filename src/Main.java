@@ -4,6 +4,33 @@ import java.util.Scanner;
 public class Main {
     static ArrayList<event> events = new ArrayList<>();
 
+    public static ArrayList<event> searchByDate(String date) {
+        ArrayList<event> result = new ArrayList<>();
+        for (int i = 0; i < events.size(); i++) {
+            if (date.equals(events.get(i).date)) {
+                result.add(events.get(i));
+            }
+        }
+        if (result.size() > 0) {
+            return result;
+        }
+        return null;
+    }
+
+    public static void schedule() {
+        System.out.println("Enter date(dd/mm/yy): ");
+        Scanner scan = new Scanner(System.in);
+        String date = scan.nextLine();
+        ArrayList<event> eventi = searchByDate(date);
+        if (eventi != null) {
+            System.out.println("__Daily schedule__");
+            for (int i = 0; i < eventi.size(); i++) {
+                System.out.println(eventi.get(i).name + " " + eventi.get(i).date + " " + eventi.get(i).startTime + " " + eventi.get(i).endTime + " " + eventi.get(i).notes + " ");
+            }
+        } else {
+            System.out.println("There are no saved events for the day.");
+        }
+    }
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
@@ -39,6 +66,10 @@ public class Main {
                     System.out.println("Event was created successfully!");
                     event Event = new event(EventName, date, start, finish, text);
                     events.add(Event);
+                }
+                case 2 -> {
+                    System.out.println();
+                    schedule();
                 }
             }
         }
