@@ -4,6 +4,35 @@ import java.util.Scanner;
 public class Main {
     static ArrayList<event> events = new ArrayList<>();
 
+    public static void availableEvent() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter date: ");
+        String date = scan.next();
+        System.out.println("From time: ");
+        String fromTime = scan.next();
+        int test = Integer.parseInt(fromTime.split(":")[0]);
+        System.out.println("Enter duration: ");
+        String duration = scan.next();
+        ArrayList<event> Events = searchByDate(date);
+        if(Events != null){
+            int test3 = 0;
+            event Event = null;
+            for (int i = 0; i < Events.size(); i++) {
+                if(Integer.parseInt(Events.get(i).startTime.split(":")[0]) > test3 || Integer.parseInt(Events.get(i).startTime.split(":")[0]) >= test){
+                    Event = Events.get(i);
+                    test3 = Integer.parseInt(Events.get(i).startTime.split(":")[0]);
+                }
+            }
+            if(Event == null){
+                System.out.println("Available slot for the event: " + date + " " + fromTime);
+            }else {
+                System.out.println("Available slot for the event: " + date + " From: " + Event.endTime);
+            }
+        } else {
+            System.out.println("The whole day: " + date + " is free !");
+        }
+    }
+
     public static event searchByName(String name) {
         for (int i = 0; i < events.size(); i++) {
             if (name.equals(events.get(i).name)) {
@@ -116,6 +145,10 @@ public class Main {
                 case 3 -> {
                     System.out.println();
                     searchEvent();
+                }
+                case 4 -> {
+                    System.out.println();
+                    availableEvent();
                 }
             }
         }
